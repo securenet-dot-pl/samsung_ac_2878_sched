@@ -62,7 +62,7 @@ def _tz(tzname):
 
 
 def _client(host, token, ssl_context, duid):
-    from samsung_dplug import SamsungAcClient
+    from .samsung_dplug import SamsungAcClient
 
     return SamsungAcClient(host=host, token=token, ssl_context=ssl_context, duid=duid)
 
@@ -82,7 +82,7 @@ def _days_to_py(days):
 
 async def get_schedules(host, token, ssl_context, duid, tzname):
     """Return the schedules stored in the AC as a list of plain dicts."""
-    from samsung_dplug import mask_to_weekdays
+    from .samsung_dplug import mask_to_weekdays
 
     c = _client(host, token, ssl_context, duid)
     scheds = await c.async_get_schedules(tz=_tz(tzname))
@@ -108,7 +108,7 @@ async def set_schedule(
     time_str, action, repeat="once", days=None, schedule_id="", enabled=True,
 ):
     """Create (schedule_id empty) or edit (schedule_id set) a power on/off schedule."""
-    from samsung_dplug import Schedule, weekdays_to_mask, ONCE, EVERYDAY_TYPE, EVERYWEEK
+    from .samsung_dplug import Schedule, weekdays_to_mask, ONCE, EVERYDAY_TYPE, EVERYWEEK
 
     rep_map = {"once": ONCE, "everyday": EVERYDAY_TYPE, "everyweek": EVERYWEEK}
     rep = rep_map.get(str(repeat).strip().lower(), ONCE)

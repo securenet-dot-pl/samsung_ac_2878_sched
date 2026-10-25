@@ -11,8 +11,7 @@
   "issue_tracker": "https://github.com/securenet-dot-pl/samsung_ac_2878_sched/issues",
   "requirements": [
     "requests>=2.21.0",
-    "xmljson>=0.2.0",
-    "pysamsung-dplug==1.0.0"
+    "xmljson>=0.2.0"
   ],
-  "version": "3.5.3-schedule"
+  "version": "3.5.4-sched-vendored"
 }

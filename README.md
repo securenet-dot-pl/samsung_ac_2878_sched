@@ -16,7 +16,7 @@ schedules**.
   Assistant is offline.
 
 Backend protocol handling uses [`pysamsung-dplug`](https://pypi.org/project/pysamsung-dplug/)
-(installed automatically via `manifest.json` requirements).
+(bundled/vendored inside the integration — no pip/internet needed).
 
 ## Installation
 
