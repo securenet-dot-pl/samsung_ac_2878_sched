@@ -1,0 +1,18 @@
+{
+  "domain": "samsung_ac_2878_sched",
+  "name": "Samsung AC 2878 (schedule)",
+  "codeowners": [
+    "@securenet-dot-pl"
+  ],
+  "config_flow": false,
+  "dependencies": [],
+  "documentation": "https://github.com/securenet-dot-pl/samsung_ac_2878_sched",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/securenet-dot-pl/samsung_ac_2878_sched/issues",
+  "requirements": [
+    "requests>=2.21.0",
+    "xmljson>=0.2.0",
+    "pysamsung-dplug==1.0.0"
+  ],
+  "version": "3.5.3-schedule"
+}

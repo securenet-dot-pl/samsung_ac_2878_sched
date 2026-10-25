@@ -1,0 +1,68 @@
+# Serwisy harmonogramu AC (dodane) — operują na encji climate obsługiwanej przez climate_ip.
+get_schedules:
+  name: "AC: pobierz harmonogramy"
+  description: >
+    Odczytuje harmonogramy wł/wył zapisane w module klimatyzatora (port 2878/DPLUG)
+    i zapisuje je w atrybucie encji 'schedules'.
+  target:
+    entity:
+      domain: climate
+
+set_schedule:
+  name: "AC: ustaw/edytuj harmonogram"
+  description: >
+    Tworzy nowy lub edytuje istniejący harmonogram wł/wył w module klimatyzatora.
+    Czas podajesz LOKALNIE (HH:MM) — konwersja na UTC modułu dzieje się automatycznie.
+  target:
+    entity:
+      domain: climate
+  fields:
+    time:
+      name: Godzina
+      description: Czas lokalny HH:MM
+      required: true
+      example: "08:30"
+      selector:
+        time: {}
+    action:
+      name: Akcja
+      required: true
+      selector:
+        select:
+          options: ["on", "off"]
+    repeat:
+      name: Powtarzanie
+      default: once
+      selector:
+        select:
+          options: ["once", "everyday", "everyweek"]
+    days:
+      name: Dni
+      description: Tylko dla once/everyweek (mon..sun)
+      selector:
+        select:
+          multiple: true
+          options: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+    schedule_id:
+      name: ID harmonogramu
+      description: Puste = nowy; ustaw ID = edycja istniejącego
+      selector:
+        text: {}
+    enabled:
+      name: Włączony
+      default: true
+      selector:
+        boolean: {}
+
+delete_schedule:
+  name: "AC: usuń harmonogram"
+  description: Usuwa harmonogram z modułu klimatyzatora po jego ID.
+  target:
+    entity:
+      domain: climate
+  fields:
+    schedule_id:
+      name: ID harmonogramu
+      required: true
+      selector:
+        text: {}
