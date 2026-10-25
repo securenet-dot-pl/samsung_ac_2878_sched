@@ -13,5 +13,5 @@
     "requests>=2.21.0",
     "xmljson>=0.2.0"
   ],
-  "version": "3.5.4-sched-vendored"
+  "version": "3.5.5-sched-sensor"
 }

@@ -55,6 +55,7 @@ from homeassistant.const import (
 from homeassistant.exceptions import PlatformNotReady
 from homeassistant.helpers.config_validation import PLATFORM_SCHEMA
 from homeassistant.helpers.service import extract_entity_ids
+from homeassistant.helpers.discovery import async_load_platform
 
 # from homeassistant.util.temperature import convert as convert_temperature
 from homeassistant.util.unit_conversion import TemperatureConverter
@@ -163,6 +164,23 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         return PlatformNotReady
 
     async_add_entities([ClimateIP(device_controller, config)], True)
+
+    # Auto-load the schedules sensor (no extra `sensor:` platform block needed).
+    hass.async_create_task(
+        async_load_platform(
+            hass,
+            "sensor",
+            CLIMATE_IP_DOMAIN,
+            {
+                "ip_address": config.get(CONF_IP_ADDRESS),
+                "token": config.get(CONF_TOKEN),
+                "cert": config.get(CONF_CERT),
+                "mac": config.get(CONF_MAC),
+                "base_name": getattr(device_controller, "name", None) or "samsungrac",
+            },
+            config,
+        )
+    )
 
     async def async_service_handler(service):
         params = {

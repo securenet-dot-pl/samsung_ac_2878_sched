@@ -80,3 +80,20 @@ When switching: remove the old `climate_ip` platform/config, delete the now‑or
 ## Credits
 Fork of [SebuZet/atxbyea samsungrac (`climate_ip`)](https://github.com/atxbyea/samsungrac).
 Schedule support via `pysamsung-dplug`.
+
+## Schedules sensor (v3.5.5+)
+A native sensor **`sensor.<name>_schedules`** is auto-created alongside the climate entity
+(no extra `sensor:` block needed):
+- **state** = number of schedules stored on the AC module
+- **attribute `schedules`** = full list (`id, time, action, repeat, days, enabled`)
+- refreshed automatically every 5 minutes
+
+Example Markdown card:
+```yaml
+type: markdown
+content: |
+  ### AC schedule
+  {% for s in state_attr('sensor.climate_ip_samsungrac_schedules','schedules') or [] %}
+  - **{{ s.time }}** -> {{ s.action }} ({{ s.repeat }}) {{ '✅' if s.enabled else '⏸️' }}
+  {% endfor %}
+```
